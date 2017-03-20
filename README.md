@@ -19,8 +19,8 @@ ESI's Dynamic Smash Stream Content
 ```bash
 docker build -t smash-stream .
 # Replace `pwd` with $pwd` on Windows
-docker run -it --rm -v `pwd`/bundles/:/usr/src/app/nodecg/bundles/ -p 9090:9090 smash-stream bash
-node index.js
+docker run -it --rm -v `pwd`:/usr/src/app/nodecg/bundles/ -p 9090:9090 smash-stream bash
+nodecg start
 ```
 
 4. Navigate to: `localhost:9090/`
