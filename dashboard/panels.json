@@ -1,0 +1,9 @@
+[
+  {
+    "name": "twitter",
+    "title": "Twitter",
+    "width": 4,
+    "file": "twitter.jade",
+    "faIcon": "fa-twitter"
+  }
+]

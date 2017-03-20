@@ -1,0 +1,135 @@
+{
+  "name": "smash-stream",
+  "homepage": "http://esi.gg/",
+  "authors": [
+    "David Soller <dsoller@outlook.com>",
+    "Alex Van Camp <email@alexvan.camp>"
+  ],
+  "scripts": {
+    "static": "eslint **/*.js",
+    "test": "npm run static"
+  },
+  "description": "ESI Smash broadcasting assets. Based on those for Tip of the Hats 2016.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.4.1",
+    "deep-equal": "^1.0.1",
+    "q": "^1.4.1",
+    "request-promise": "^3.0.0",
+    "twemoji": "^2.0.5",
+    "twitter": "^1.2.5"
+  },
+  "devDependencies": {
+    "eslint": "^3.8.1",
+    "eslint-config-xo": "^0.17.0"
+  },
+  "nodecg": {
+    "compatibleRange": "~0.8.0",
+    "graphics": [
+      {
+        "file": "index.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "countdown.html",
+        "width": 1920,
+        "height": 1080
+      }
+    ],
+    "dashboardPanels": [
+      {
+        "name": "master",
+        "title": "Master Controls",
+        "width": 2,
+        "file": "master.html",
+        "headerColor": "#f47425"
+      },
+      {
+        "name": "lowerthird",
+        "title": "Lowerthird",
+        "width": 2,
+        "file": "lowerthird.html",
+        "headerColor": "#f47425"
+      },
+      {
+        "name": "scoreboard",
+        "title": "Scoreboard",
+        "width": 2,
+        "file": "scoreboard.html",
+        "headerColor": "#f47425"
+      },
+      {
+        "name": "twitter",
+        "title": "Twitter",
+        "width": 3,
+        "file": "twitter.html",
+        "headerColor": "#f47425"
+      },
+      {
+        "name": "schedule",
+        "title": "Schedule",
+        "width": 4,
+        "file": "schedule.html",
+        "headerColor": "#f47425"
+      },
+      {
+        "name": "countdown",
+        "title": "Countdn",
+        "width": 1,
+        "file": "countdown.html",
+        "headerColor": "#f47425"
+      },
+      {
+        "name": "nameplates",
+        "title": "Nameplates",
+        "width": 4,
+        "file": "nameplate.html",
+        "headerColor": "#f47425"
+      }
+    ],
+    "soundCues": [
+      {
+        "name": "image_in",
+        "assignable": false,
+        "defaultFile": "sound/image_in.ogg"
+      },
+      {
+        "name": "image_out",
+        "assignable": false,
+        "defaultFile": "sound/image_out.ogg"
+      },
+      {
+        "name": "lowerthird_in",
+        "assignable": false,
+        "defaultFile": "sound/lowerthird_in.ogg"
+      },
+      {
+        "name": "lowerthird_out",
+        "assignable": false,
+        "defaultFile": "sound/lowerthird_out.ogg"
+      },
+      {
+        "name": "scoreboard_in",
+        "assignable": false,
+        "defaultFile": "sound/scoreboard_in.ogg"
+      },
+      {
+        "name": "scoreboard_out",
+        "assignable": false,
+        "defaultFile": "sound/scoreboard_out.ogg"
+      },
+      {
+        "name": "tweet_in",
+        "assignable": false,
+        "defaultFile": "sound/tweet_in.ogg"
+      },
+      {
+        "name": "tweet_out",
+        "assignable": false,
+        "defaultFile": "sound/tweet_out.ogg"
+      }
+    ]
+  }
+}
