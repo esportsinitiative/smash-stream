@@ -3,8 +3,11 @@
 
 module.exports = function (nodecg) {
 	// Initialize replicants.
-	nodecg.Replicant('player1', {defaultValue: {name: '', info: ''}});
-	nodecg.Replicant('player2', {defaultValue: {name: '', info: ''}});
+	nodecg.Replicant('gameTitle', {defaultValue: {next: '', current: ''}});
+	nodecg.Replicant('gameType', {defaultValue: {next: '', current: ''}});
+	nodecg.Replicant('player1', {defaultValue: {next: '', current: ''}});
+	nodecg.Replicant('player2', {defaultValue: {next: '', current: ''}});
 
-	nodecg.Replicant('names-playerVisible', {defaultValue: false});
+	nodecg.Replicant('gameInfoVisible', {defaultValue: false});
+	nodecg.Replicant('playerVisible', {defaultValue: false});
 };

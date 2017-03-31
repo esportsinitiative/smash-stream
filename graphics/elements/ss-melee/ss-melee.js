@@ -1,29 +1,53 @@
 (function () {
 	'use strict';
 
+	const gameTitle = nodecg.Replicant('gameTitle');
+	const gameType = nodecg.Replicant('gameType');
 	const player1 = nodecg.Replicant('player1');
 	const player2 = nodecg.Replicant('player2');
-	// const player3 = nodecg.Replicant('player3');
-	// const player4 = nodecg.Replicant('player4');
-	const playerVisible = nodecg.Replicant('names-playerVisible');
-
-	// const INTERVAL = 10;
-	// const onNow = nodecg.Replicant('onNow');
-	// const upNext = nodecg.Replicant('upNext');
+	const gameInfoVisible = nodecg.Replicant('gameInfoVisible');
+	const playerVisible = nodecg.Replicant('playerVisible');
 
 	/* Pixels */
 	const MAX_PLAYER_NAME_WIDTH = 240;
+	const MAX_HEADER_WIDTH = 460;
 
 	Polymer({
 		is: 'ss-melee',
 
 		ready() {
 			this.tl = new TimelineLite({autoRemoveChildren: true});
-			// this.tl.set(this.$.content, {y: '100%'});
-			// this.$.content.innerHTML = "hello";
+
+			gameTitle.on('change', newVal => {
+				if (!newVal.next.trim() && !newVal.current.trim()) {
+					this.gameTitle = null;
+				} else {
+					this.gameTitle = {};
+					this.gameTitle = newVal;
+				}
+
+				if (!this._gameTitleReady) {
+					this._gameTitleReady = true;
+					this._checkReplicantsReady();
+				}
+			});
+
+			gameType.on('change', newVal => {
+				if (!newVal.next.trim() && !newVal.current.trim()) {
+					this.gameType = null;
+				} else {
+					this.gameType = {};
+					this.gameType = newVal;
+				}
+
+				if (!this._gameTypeReady) {
+					this._gameTypeReady = true;
+					this._checkReplicantsReady();
+				}
+			});
 
 			player1.on('change', newVal => {
-				if (!newVal.name.trim() && !newVal.info.trim()) {
+				if (!newVal.next.trim() && !newVal.current.trim()) {
 					this.player1 = null;
 				} else {
 					this.player1 = {};
@@ -37,7 +61,7 @@
 			});
 
 			player2.on('change', newVal => {
-				if (!newVal.name.trim() && !newVal.info.trim()) {
+				if (!newVal.next.trim() && !newVal.current.trim()) {
 					this.player2 = null;
 				} else {
 					this.player2 = {};
@@ -49,41 +73,62 @@
 					this._checkReplicantsReady();
 				}
 			});
-
-			// player3.on('change', newVal => {
-			// 	if (!newVal.name.trim() && !newVal.info.trim()) {
-			// 		this.player3 = null;
-			// 	} else {
-			// 		this.player3 = {};
-			// 		this.player3 = newVal;
-			// 	}
-
-			// 	if (!this._player3Ready) {
-			// 		this._player3Ready = true;
-			// 		this._checkReplicantsReady();
-			// 	}
-			// });
-
-			// player4.on('change', newVal => {
-			// 	if (!newVal.name.trim() && !newVal.info.trim()) {
-			// 		this.player4 = null;
-			// 	} else {
-			// 		this.player4 = {};
-			// 		this.player4 = newVal;
-			// 	}
-
-			// 	if (!this._player4Ready) {
-			// 		this._player4Ready = true;
-			// 		this._checkReplicantsReady();
-			// 	}
-			// });
 		},
 
 		// Only declare the "visible" replicants once all the other replicants are ready.
 		_checkReplicantsReady() {
-			if (this._player1Ready && this._player2Ready) { // && this._player3Ready && this._player4Ready) {
+			if (this._gameTitleReady && this._gameTypeReady && this._player1Ready && this._player2Ready) {
 				console.log('all replicants ready, adding change handlers for couchVisible and playerVisible');
+				gameInfoVisible.on('change', this.gameInfoVisibleChanged.bind(this));
 				playerVisible.on('change', this.playersVisibleChanged.bind(this));
+			}
+		},
+
+		gameInfoVisibleChanged(newVal) {
+			if (newVal) {
+				this.tl.add('matchInfoEnter');
+
+				if (this.gameTitle) {
+					this.tl.call(() => {
+						this.setAndFitText(this.$$('#match-title .header-info'), this.gameTitle.current, MAX_HEADER_WIDTH);
+					}, null, null, 'matchInfoEnter');
+
+					this.tl.to('#match-title', 0.5, {
+						opacity: 1,
+						x: 0,
+						ease: Power2.easeOut
+					}, 'matchInfoEnter');
+				}
+
+				if (this.gameType) {
+					this.tl.call(() => {
+						this.setAndFitText(this.$$('#match-type .header-info'), this.gameType.current, MAX_HEADER_WIDTH);
+					}, null, null, 'matchInfoEnter');
+
+					this.tl.to('#match-type', 0.5, {
+						opacity: 1,
+						x: 0,
+						ease: Power2.easeOut
+					}, 'matchInfoEnter');
+				}
+			} else {
+				this.tl.add('matchInfoExit');
+
+				this.tl.to([
+					'#match-title'
+				], 0.5, {
+					opacity: 0,
+					x: 25,
+					ease: Power2.easeIn
+				}, 'matchInfoExit');
+
+				this.tl.to([
+					'#match-type'
+				], 0.5, {
+					opacity: 0,
+					x: -25,
+					ease: Power2.easeIn
+				}, 'matchInfoExit');
 			}
 		},
 
@@ -93,8 +138,7 @@
 
 				if (this.player1) {
 					this.tl.call(() => {
-						this.setAndFitText(this.$$('#player-name-left .player-name'), this.player1.name, MAX_PLAYER_NAME_WIDTH);
-						// this.setAndFitText(this.$$('#player-name-left .info-content'), this.player1.info, MAX_PLAYER_INFO_WIDTH);
+						this.setAndFitText(this.$$('#player-name-left .player-name'), this.player1.current, MAX_PLAYER_NAME_WIDTH);
 					}, null, null, 'playersEnter');
 
 					this.tl.to('#player-name-left', 0.5, {
@@ -106,8 +150,7 @@
 
 				if (this.player2) {
 					this.tl.call(() => {
-						this.setAndFitText(this.$$('#player-name-right .player-name'), this.player2.name, MAX_PLAYER_NAME_WIDTH);
-						// this.setAndFitText(this.$$('#player-name-right .info-content'), this.player2.info, MAX_PLAYER_INFO_WIDTH);
+						this.setAndFitText(this.$$('#player-name-right .player-name'), this.player2.current, MAX_PLAYER_NAME_WIDTH);
 					}, null, null, 'playersEnter');
 
 					this.tl.to('#player-name-right', 0.5, {
@@ -116,38 +159,11 @@
 						ease: Power2.easeOut
 					}, 'playersEnter');
 				}
-
-				// if (this.player3) {
-				// 	this.tl.call(() => {
-				// 		this.setAndFitText(this.$$('#player3 .player-name'), this.player3.name, MAX_PLAYER_NAME_WIDTH);
-				// 		// this.setAndFitText(this.$$('#player3 .info-content'), this.player3.info, MAX_PLAYER_INFO_WIDTH);
-				// 	}, null, null, 'playersEnter');
-
-				// 	this.tl.to('#player3', 0.5, {
-				// 		opacity: 1,
-				// 		x: 0,
-				// 		ease: Power2.easeOut
-				// 	}, 'playersEnter');
-				// }
-
-				// if (this.player4) {
-				// 	this.tl.call(() => {
-				// 		this.setAndFitText(this.$$('#player4 .player-name'), this.player4.name, MAX_PLAYER_NAME_WIDTH);
-				// 		// this.setAndFitText(this.$$('#player4 .info-content'), this.player4.info, MAX_PLAYER_INFO_WIDTH);
-				// 	}, null, null, 'playersEnter');
-
-				// 	this.tl.to('#player4', 0.5, {
-				// 		opacity: 1,
-				// 		x: 0,
-				// 		ease: Power2.easeOut
-				// 	}, 'playersEnter');
-				// }
 			} else {
 				this.tl.add('playersExit');
 
 				this.tl.to([
 					'#player-name-left'
-					// '#player3'
 				], 0.5, {
 					opacity: 0,
 					x: -25,
@@ -156,7 +172,6 @@
 
 				this.tl.to([
 					'#player-name-right'
-					// '#player4'
 				], 0.5, {
 					opacity: 0,
 					x: 25,
@@ -174,113 +189,5 @@
 				TweenLite.set(node, {scaleX: 1});
 			}
 		}
-
-		// attached() {
-		// 	setTimeout(() => {
-		// 		// Start the rotation
-		// 		this.showSchedule();
-		// 	}, 1500);
-		// },
-
-		// fitContent() {
-		// 	const maxWidth = this.$.body.clientWidth - 32;
-		// 	const contentWidth = this.$.content.clientWidth;
-		// 	const delta = contentWidth - maxWidth;
-		// 	if (delta > 1) {
-		// 		TweenLite.set(this.$.content, {scaleX: maxWidth / contentWidth});
-		// 	} else {
-		// 		TweenLite.set(this.$.content, {scaleX: 1});
-		// 	}
-		// },
-
-		// enter() {
-		// 	this.tl.to(this.$.label, 0.8, {
-		// 		y: '0%',
-		// 		ease: Back.easeInOut.config(1.7)
-		// 	});
-
-		// 	this.tl.to(this.$.body, 0.66, {
-		// 		scaleX: '1',
-		// 		ease: Power3.easeInOut
-		// 	});
-
-		// 	this.tl.to(this.$.content, 0.66, {
-		// 		y: '0%',
-		// 		ease: Power3.easeOut
-		// 	}, '-=0.18');
-		// },
-
-		// exit() {
-		// 	this.tl.call(() => {
-		// 		this.tl.pause();
-		// 		let duration = Math.max(this.$.body.clientWidth / 500, 0.9);
-		// 		duration = Math.min(duration, 1.8);
-		// 		TweenLite.to(this.$.label, duration, {
-		// 			x: this.$.body.clientWidth + 1,
-		// 			ease: Power3.easeInOut,
-		// 			onComplete: function () {
-		// 				this.tl.resume();
-		// 			}.bind(this)
-		// 		});
-		// 	}, null, null, '+=0.01');
-
-		// 	this.tl.set(this.$.body, {scaleX: 0});
-		// 	this.tl.set(this.$.content, {y: '100%'});
-
-		// 	this.tl.to(this.$.label, 0.4, {
-		// 		y: '100%',
-		// 		ease: Power3.easeIn
-		// 	}, '-=0.08');
-
-		// 	this.tl.set(this.$.label, {x: 0});
-		// },
-
-		// showSchedule() {
-		// 	this.tl.call(() => {
-		// 		this.$.content.style.width = 'auto';
-		// 		this.customStyle['--toth-ticker-content-color'] = '#f47425';
-		// 		this.updateStyles();
-		// 		this.$.label.innerText = 'ON NOW';
-		// 		this.$.content.innerHTML = onNow.value;
-		// 		this.fitContent();
-		// 	});
-		// 	this.enter();
-		// 	this.tl.to({}, INTERVAL, {});
-		// 	this.exit();
-
-		// 	if (upNext.value) {
-		// 		this.tl.call(() => {
-		// 			this.$.label.innerText = 'UP NEXT';
-		// 			this.$.content.innerHTML = upNext.value;
-		// 			this.fitContent();
-		// 		});
-		// 		this.enter();
-		// 		this.tl.to({}, INTERVAL, {});
-		// 		this.exit();
-		// 	}
-
-		// 	this.tl.call(this.showCTA, null, this);
-		// },
-
-		// showCTA() {
-		// 	this.tl.to(this.$.cta, 0.66, {
-		// 		y: '0%',
-		// 		ease: Back.easeOut.config(0.9)
-		// 	});
-
-		// 	this.tl.to(this.$.cta, 1, {
-		// 		y: '-100%',
-		// 		ease: Back.easeInOut.config(0.9)
-		// 	}, `+=${INTERVAL}`);
-
-		// 	this.tl.to(this.$.cta, 0.66, {
-		// 		y: '-200%',
-		// 		ease: Back.easeIn.config(0.9)
-		// 	}, `+=${INTERVAL}`);
-
-		// 	this.tl.set(this.$.cta, {y: '100%'});
-
-		// 	this.tl.call(this.showSchedule, null, this);
-		// }
 	});
 })();

@@ -13,50 +13,92 @@
 				padding: 0 4px;
 			}
 
-			.names {
+			.next {
 				padding: 0 4px;
 			}
 
-			.infos {
+			.current {
 				padding: 0 4px;
 			}
 		</style>
 
-		<iron-ajax auto url="nameplate.json" handle-as="json" last-response="{{talentRoster}}"></iron-ajax>
+		<!--<iron-ajax auto url="game-types.json" handle-as="json" last-response="{{gameTypes}}"></iron-ajax>-->
+
+		<div class="horizontal layout">
+			<div class="flex talent-dropdown">
+				<vaadin-combo-box
+						label="Game Title"
+						on-selected-item-changed="_handleSelectedItemChangedNext"
+                        item-label-path="name"
+				        data-slot="gameTitle"
+				></vaadin-combo-box>
+
+				<vaadin-combo-box
+						label="Game Type"
+						on-selected-item-changed="_handleSelectedItemChangedNext"
+	                    item-label-path="name"
+				        data-slot="gameType"
+				></vaadin-combo-box>
+			</div>
+
+			<div class="flex-2 next">
+				<paper-input label="Next" value="{{gameTitle.next}}" always-float-label></paper-input>
+				<paper-input label="Next" value="{{gameType.next}}" always-float-label></paper-input>
+			</div>
+
+			<div class="flex-2 current">
+				<paper-input disabled="[[gameInfoVisible]]" label="Current" value="{{gameTitle.current}}" always-float-label></paper-input>
+				<paper-input disabled="[[gameInfoVisible]]" label="Current" value="{{gameType.current}}" always-float-label></paper-input>
+			</div>
+		</div>
+
+		<div class="horizontal layout">
+			<paper-button raised on-tap="updateGameInfo" disabled="{{gameInfoVisible}}" class="nodecg-success flex">
+				Update Game Info
+			</paper-button>
+
+			<paper-button raised on-tap="showGameInfo" disabled="{{gameInfoVisible}}" class="nodecg-success flex">
+				Show Game Info
+			</paper-button>
+
+			<paper-button raised on-tap="hideGameInfo" disabled="{{!gameInfoVisible}}" class="nodecg-danger flex">
+				Hide Game Info
+			</paper-button>
+		</div>
 
 		<div class="horizontal layout">
 			<div class="flex players-dropdown">
 				<vaadin-combo-box
-						disabled="[[playersVisible]]"
 						label="Player Name Left"
-						items="[[talentRoster]]"
-						on-selected-item-changed="_handleSelectedItemChanged"
+						on-selected-item-changed="_handleSelectedItemChangedNext"
 	                    item-label-path="name"
 				        data-slot="player1"
 				></vaadin-combo-box>
 
 				<vaadin-combo-box
-						disabled="[[playersVisible]]"
 						label="Player Name Right"
-						items="[[talentRoster]]"
-						on-selected-item-changed="_handleSelectedItemChanged"
+						on-selected-item-changed="_handleSelectedItemChangedNext"
                         item-label-path="name"
 				        data-slot="player2"
 				></vaadin-combo-box>
 			</div>
 
-			<div class="flex-2 names">
-				<paper-input disabled="[[playersVisible]]" label="Name" value="{{player1.name}}" always-float-label></paper-input>
-				<paper-input disabled="[[playersVisible]]" label="Name" value="{{player2.name}}" always-float-label></paper-input>
+			<div class="flex-2 next">
+				<paper-input label="Next" value="{{player1.next}}" always-float-label></paper-input>
+				<paper-input label="Next" value="{{player2.next}}" always-float-label></paper-input>
 			</div>
 
-			<div class="flex-2 infos">
-				<paper-input disabled="[[playersVisible]]" label="Info" value="{{player1.info}}" always-float-label></paper-input>
-				<paper-input disabled="[[playersVisible]]" label="Info" value="{{player2.info}}" always-float-label></paper-input>
+			<div class="flex-2 current">
+				<paper-input disabled="[[playersVisible]]" label="Current" value="{{player1.current}}" always-float-label></paper-input>
+				<paper-input disabled="[[playersVisible]]" label="Current" value="{{player2.current}}" always-float-label></paper-input>
 			</div>
 		</div>
 
 		<div class="horizontal layout">
+			<paper-button raised on-tap="updatePlayers" disabled="{{playersVisible}}" class="nodecg-success flex">
+				Update Players
+			</paper-button>
+
 			<paper-button raised on-tap="showPlayers" disabled="{{playersVisible}}" class="nodecg-success flex">
 				Show Players
 			</paper-button>
@@ -66,7 +108,8 @@
 			</paper-button>
 		</div>
 
-		<nodecg-replicant replicant-name="names-playerVisible" value="{{playersVisible}}"></nodecg-replicant>
+		<nodecg-replicant replicant-name="gameInfoVisible" value="{{gameInfoVisible}}"></nodecg-replicant>
+		<nodecg-replicant replicant-name="playerVisible" value="{{playersVisible}}"></nodecg-replicant>
 	</template>
 
 	<script src="smash-names-control.js"></script>
