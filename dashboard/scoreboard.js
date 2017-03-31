@@ -5,17 +5,17 @@
 	const update = document.getElementById('update');
 	const hide = document.getElementById('hide');
 	const swap = document.getElementById('swap');
-	const bluScore = document.querySelectorAll('paper-input[label="Score"]')[0];
+	const leftScore = document.querySelectorAll('paper-input[label="Score"]')[0];
 	const bluTag = document.querySelectorAll('paper-input[label="Tag"]')[0];
-	const redScore = document.querySelectorAll('paper-input[label="Score"]')[1];
+	const rightScore = document.querySelectorAll('paper-input[label="Score"]')[1];
 	const redTag = document.querySelectorAll('paper-input[label="Tag"]')[1];
 	const scoreboardShowing = nodecg.Replicant('scoreboardShowing');
 	const scores = nodecg.Replicant('scores');
 
 	scores.on('change', newVal => {
-		bluScore.value = newVal.blu.score;
+		leftScore.value = newVal.blu.score;
 		bluTag.value = newVal.blu.tag;
-		redScore.value = newVal.red.score;
+		rightScore.value = newVal.red.score;
 		redTag.value = newVal.red.tag;
 	});
 
@@ -58,11 +58,11 @@
 	function doUpdate() {
 		scores.value = {
 			red: {
-				score: redScore.value,
+				score: rightScore.value,
 				tag: redTag.value
 			},
 			blu: {
-				score: bluScore.value,
+				score: leftScore.value,
 				tag: bluTag.value
 			}
 		};

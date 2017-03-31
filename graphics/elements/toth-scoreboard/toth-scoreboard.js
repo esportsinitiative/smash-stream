@@ -8,15 +8,15 @@
 		is: 'toth-scoreboard',
 
 		properties: {
-			redScore: {
+			rightScore: {
 				type: Number,
 				value: 0,
-				observer: 'redScoreChanged'
+				observer: 'rightScoreChanged'
 			},
-			bluScore: {
+			leftScore: {
 				type: Number,
 				value: 0,
-				observer: 'bluScoreChanged'
+				observer: 'leftScoreChanged'
 			},
 			redTag: {
 				type: String,
@@ -38,11 +38,11 @@
 			}
 		},
 
-		redScoreChanged(newVal) {
+		rightScoreChanged(newVal) {
 			this.changeScore(this.$$('div[team="red"] .score'), newVal);
 		},
 
-		bluScoreChanged(newVal) {
+		leftScoreChanged(newVal) {
 			this.changeScore(this.$$('div[team="blu"] .score'), newVal);
 		},
 
@@ -63,8 +63,8 @@
 
 		attached() {
 			scores.on('change', newVal => {
-				this.redScore = newVal.red.score;
-				this.bluScore = newVal.blu.score;
+				this.rightScore = newVal.red.score;
+				this.leftScore = newVal.blu.score;
 				this.redTag = newVal.red.tag;
 				this.bluTag = newVal.blu.tag;
 			});

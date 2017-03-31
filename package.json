@@ -52,31 +52,10 @@
         "headerColor": "#f47425"
       },
       {
-        "name": "lowerthird",
-        "title": "Lowerthird",
-        "width": 2,
-        "file": "lowerthird.html",
-        "headerColor": "#f47425"
-      },
-      {
         "name": "scoreboard",
         "title": "Scoreboard",
         "width": 2,
         "file": "scoreboard.html",
-        "headerColor": "#f47425"
-      },
-      {
-        "name": "twitter",
-        "title": "Twitter",
-        "width": 3,
-        "file": "twitter.html",
-        "headerColor": "#f47425"
-      },
-      {
-        "name": "schedule",
-        "title": "Schedule",
-        "width": 4,
-        "file": "schedule.html",
         "headerColor": "#f47425"
       },
       {

@@ -8,12 +8,28 @@
 	const gameInfoVisible = nodecg.Replicant('gameInfoVisible');
 	const playerVisible = nodecg.Replicant('playerVisible');
 
+	const scoreboardShowing = nodecg.Replicant('scoreboardShowing');
+	const scores = nodecg.Replicant('scores');
+
 	/* Pixels */
 	const MAX_PLAYER_NAME_WIDTH = 240;
 	const MAX_HEADER_WIDTH = 460;
 
 	Polymer({
 		is: 'ss-melee',
+
+		properties: {
+			rightScore: {
+				type: Number,
+				value: 0,
+				observer: 'rightScoreChanged'
+			},
+			leftScore: {
+				type: Number,
+				value: 0,
+				observer: 'leftScoreChanged'
+			}
+		},
 
 		ready() {
 			this.tl = new TimelineLite({autoRemoveChildren: true});
@@ -73,6 +89,15 @@
 					this._checkReplicantsReady();
 				}
 			});
+		},
+
+		attached() {
+			scores.on('change', newVal => {
+				this.rightScore = newVal.red.score;
+				this.leftScore = newVal.blu.score;
+			});
+
+			scoreboardShowing.on('change', this.scoreVisibleChange.bind(this));
 		},
 
 		// Only declare the "visible" replicants once all the other replicants are ready.
@@ -178,6 +203,57 @@
 					ease: Power2.easeIn
 				}, 'playersExit');
 			}
+		},
+
+		scoreVisibleChange(newVal) {
+			if (newVal) {
+				this.tl.add('scoreVisibleEnter');
+
+				this.tl.call(() => {
+					this.$$('#score-left .score').innerText = this.leftScore;
+					this.$$('#score-right .score').innerText = this.rightScore;
+				}, null, null, 'scoreVisibleEnter');
+
+				this.tl.to('#score-left', 0.5, {
+					opacity: 1,
+					x: 0,
+					ease: Power2.easeOut
+				}, 'scoreVisibleEnter');
+
+				this.tl.to('#score-right', 0.5, {
+					opacity: 1,
+					x: 0,
+					ease: Power2.easeOut
+				}, 'scoreVisibleEnter');
+			} else {
+				this.tl.add('scoreVisibleExit');
+
+				this.tl.to([
+					'#score-left'
+				], 0.5, {
+					opacity: 0,
+					ease: Power2.easeIn
+				}, 'scoreVisibleExit');
+
+				this.tl.to([
+					'#score-right'
+				], 0.5, {
+					opacity: 0,
+					ease: Power2.easeIn
+				}, 'scoreVisibleExit');
+			}
+		},
+
+		rightScoreChanged(newVal) {
+			this.changeScore(this.$$('#score-left .score'), newVal);
+		},
+
+		leftScoreChanged(newVal) {
+			this.changeScore(this.$$('#score-right .score'), newVal);
+		},
+
+		changeScore(scoreEl, newValue) {
+			scoreEl.innerHTML = newValue;
 		},
 
 		setAndFitText(node, newString, maxWidth) {
