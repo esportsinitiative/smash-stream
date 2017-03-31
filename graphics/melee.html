@@ -6,6 +6,7 @@
     <script>try {Typekit.load();} catch (e) {}</script>
 	<script src="components/gsap/src/minified/TweenMax.min.js"></script>
 	<script src="app/main.js"></script>
+	<link href="elements/ss-melee/ss-melee.html" rel="import">
 	<link href="elements/toth-ticker/toth-ticker.html" rel="import">
     <link href="elements/toth-brb/toth-brb.html" rel="import">
     <link href="elements/toth-lowerthird/toth-lowerthird.html" rel="import">
@@ -18,6 +19,7 @@
 		body {
 			margin: 0;
 			opacity: 0;
+			background-color: #f00; /* TODO: Remove */
 		}
 
 		#container {
@@ -71,21 +73,22 @@
 			left: 25px;
 		}
 		#nameplate {
-		position: absolute;
-		top: 180px;
+			position: absolute;
+			top: 180px;
 		}
 	</style>
 </head>
 <body>
     <div id="container">
         <toth-brb id="brb"></toth-brb>
-		<div id="hashtag">#TotH2016</div>
+		<div id="hashtag">#ESISmash</div>
         <toth-scoreboard id="scoreboard"></toth-scoreboard>
-        <toth-lowerthird id="lowerthird"></toth-lowerthird>
+        <!--<toth-lowerthird id="lowerthird"></toth-lowerthird>
         <toth-sponsors id="sponsors"></toth-sponsors>
         <toth-tweet id="tweet"></toth-tweet>
-		<!--<toth-nameplate id="nameplate"> </toth-nameplate>-->
-		<toth-ticker id="ticker"></toth-ticker>
+		<toth-nameplate id="nameplate"> </toth-nameplate>
+		<toth-ticker id="ticker"></toth-ticker> -->
+		<ss-melee id="melee"></ss-melee>
     </div>
 </body>
 </html>

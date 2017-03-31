@@ -39,9 +39,9 @@ module.exports = function (nodecg) {
 	}
 
 	try {
-		require('./nameplates')(nodecg);
+		require('./names')(nodecg);
 	} catch (e) {
-		nodecg.log.error('Failed to load "nameplates" lib:', e.stack);
+		nodecg.log.error('Failed to load "names" lib:', e.stack);
 		process.exit(1);
 	}
 };

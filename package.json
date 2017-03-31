@@ -36,6 +36,11 @@
         "file": "countdown.html",
         "width": 1920,
         "height": 1080
+      },
+      {
+        "file": "melee.html",
+        "width": 1920,
+        "height": 1080
       }
     ],
     "dashboardPanels": [
@@ -82,10 +87,10 @@
         "headerColor": "#f47425"
       },
       {
-        "name": "nameplates",
-        "title": "Nameplates",
+        "name": "names",
+        "title": "Names",
         "width": 4,
-        "file": "nameplate.html",
+        "file": "names.html",
         "headerColor": "#f47425"
       }
     ],
