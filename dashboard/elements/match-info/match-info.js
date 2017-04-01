@@ -1,31 +1,31 @@
 (function () {
 	'use strict';
 
-	const gameTitle = nodecg.Replicant('gameTitle');
-	const gameType = nodecg.Replicant('gameType');
+	const matchTitle = nodecg.Replicant('matchTitle');
+	const matchFormat = nodecg.Replicant('matchFormat');
 	const player1 = nodecg.Replicant('player1');
 	const player2 = nodecg.Replicant('player2');
 
 	// Used to programmatically access any of the above 8 replicants, via `REPLICANTS[name]`.
 	const REPLICANTS = {
-		gameTitle,
-		gameType,
+		matchTitle,
+		matchFormat,
 		player1,
 		player2
 	};
 
 	Polymer({
-		is: 'smash-names-control',
+		is: 'match-info',
 
 		ready() {
-			gameTitle.on('change', newVal => {
-				this.gameTitle = {};
-				this.gameTitle = newVal;
+			matchTitle.on('change', newVal => {
+				this.matchTitle = {};
+				this.matchTitle = newVal;
 			});
 
-			gameType.on('change', newVal => {
-				this.gameType = {};
-				this.gameType = newVal;
+			matchFormat.on('change', newVal => {
+				this.matchFormat = {};
+				this.matchFormat = newVal;
 			});
 
 			player1.on('change', newVal => {
@@ -40,22 +40,22 @@
 		},
 
 		updateGameInfo() {
-			if (this.gameTitle.next != '') {
-				this.gameTitle.current = this.gameTitle.next;
-				this.gameTitle.next = '';
+			if (this.matchTitle.next != '') {
+				this.matchTitle.current = this.matchTitle.next;
+				this.matchTitle.next = '';
 			}
-			if (this.gameType.next != '') {
-				this.gameType.current = this.gameType.next;
-				this.gameType.next = '';
+			if (this.matchFormat.next != '') {
+				this.matchFormat.current = this.matchFormat.next;
+				this.matchFormat.next = '';
 			}
 		},
 
 		hideGameInfo() {
-			this.gameInfoVisible = false;
+			this.matchInfoVisible = false;
 		},
 
 		showGameInfo() {
-			this.gameInfoVisible = true;
+			this.matchInfoVisible = true;
 		},
 
 		updatePlayers() {

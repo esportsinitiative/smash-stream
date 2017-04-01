@@ -39,9 +39,9 @@ module.exports = function (nodecg) {
 	}
 
 	try {
-		require('./names')(nodecg);
+		require('./match-info')(nodecg);
 	} catch (e) {
-		nodecg.log.error('Failed to load "names" lib:', e.stack);
+		nodecg.log.error('Failed to load "match-info" lib:', e.stack);
 		process.exit(1);
 	}
 };

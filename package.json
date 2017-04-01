@@ -71,10 +71,10 @@
         "headerColor": "#f47425"
       },
       {
-        "name": "names",
-        "title": "Names",
-        "width": 4,
-        "file": "names.html",
+        "name": "match-info",
+        "title": "Match Information",
+        "width": 5,
+        "file": "match-info.html",
         "headerColor": "#f47425"
       }
     ],

@@ -1,11 +1,11 @@
 (function () {
 	'use strict';
 
-	const gameTitle = nodecg.Replicant('gameTitle');
-	const gameType = nodecg.Replicant('gameType');
+	const matchTitle = nodecg.Replicant('matchTitle');
+	const matchFormat = nodecg.Replicant('matchFormat');
 	const player1 = nodecg.Replicant('player1');
 	const player2 = nodecg.Replicant('player2');
-	const gameInfoVisible = nodecg.Replicant('gameInfoVisible');
+	const matchInfoVisible = nodecg.Replicant('matchInfoVisible');
 	const playerVisible = nodecg.Replicant('playerVisible');
 
 	const scoreboardShowing = nodecg.Replicant('scoreboardShowing');
@@ -34,30 +34,30 @@
 		ready() {
 			this.tl = new TimelineLite({autoRemoveChildren: true});
 
-			gameTitle.on('change', newVal => {
+			matchTitle.on('change', newVal => {
 				if (!newVal.next.trim() && !newVal.current.trim()) {
-					this.gameTitle = null;
+					this.matchTitle = null;
 				} else {
-					this.gameTitle = {};
-					this.gameTitle = newVal;
+					this.matchTitle = {};
+					this.matchTitle = newVal;
 				}
 
-				if (!this._gameTitleReady) {
-					this._gameTitleReady = true;
+				if (!this._matchTitleReady) {
+					this._matchTitleReady = true;
 					this._checkReplicantsReady();
 				}
 			});
 
-			gameType.on('change', newVal => {
+			matchFormat.on('change', newVal => {
 				if (!newVal.next.trim() && !newVal.current.trim()) {
-					this.gameType = null;
+					this.matchFormat = null;
 				} else {
-					this.gameType = {};
-					this.gameType = newVal;
+					this.matchFormat = {};
+					this.matchFormat = newVal;
 				}
 
-				if (!this._gameTypeReady) {
-					this._gameTypeReady = true;
+				if (!this._matchFormatReady) {
+					this._matchFormatReady = true;
 					this._checkReplicantsReady();
 				}
 			});
@@ -102,20 +102,20 @@
 
 		// Only declare the "visible" replicants once all the other replicants are ready.
 		_checkReplicantsReady() {
-			if (this._gameTitleReady && this._gameTypeReady && this._player1Ready && this._player2Ready) {
+			if (this._matchTitleReady && this._matchFormatReady && this._player1Ready && this._player2Ready) {
 				console.log('all replicants ready, adding change handlers for couchVisible and playerVisible');
-				gameInfoVisible.on('change', this.gameInfoVisibleChanged.bind(this));
+				matchInfoVisible.on('change', this.matchInfoVisibleChanged.bind(this));
 				playerVisible.on('change', this.playersVisibleChanged.bind(this));
 			}
 		},
 
-		gameInfoVisibleChanged(newVal) {
+		matchInfoVisibleChanged(newVal) {
 			if (newVal) {
 				this.tl.add('matchInfoEnter');
 
-				if (this.gameTitle) {
+				if (this.matchTitle) {
 					this.tl.call(() => {
-						this.setAndFitText(this.$$('#match-title .header-info'), this.gameTitle.current, MAX_HEADER_WIDTH);
+						this.setAndFitText(this.$$('#match-title .header-info'), this.matchTitle.current, MAX_HEADER_WIDTH);
 					}, null, null, 'matchInfoEnter');
 
 					this.tl.to('#match-title', 0.5, {
@@ -125,9 +125,9 @@
 					}, 'matchInfoEnter');
 				}
 
-				if (this.gameType) {
+				if (this.matchFormat) {
 					this.tl.call(() => {
-						this.setAndFitText(this.$$('#match-type .header-info'), this.gameType.current, MAX_HEADER_WIDTH);
+						this.setAndFitText(this.$$('#match-type .header-info'), this.matchFormat.current, MAX_HEADER_WIDTH);
 					}, null, null, 'matchInfoEnter');
 
 					this.tl.to('#match-type', 0.5, {
