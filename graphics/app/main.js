@@ -19,7 +19,7 @@
 		const hashtag = document.getElementById('hashtag');
 		if (newVal) {
 			TweenLite.to(hashtag, 0.6, {
-				opacity: 0.5,
+				opacity: 1,
 				ease: Power1.easeInOut
 			});
 		} else {

@@ -28,11 +28,6 @@
     "compatibleRange": "~0.8.0",
     "graphics": [
       {
-        "file": "index.html",
-        "width": 1920,
-        "height": 1080
-      },
-      {
         "file": "countdown.html",
         "width": 1920,
         "height": 1080
@@ -44,6 +39,11 @@
       },
       {
         "file": "smash4.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "hub-melee.html",
         "width": 1920,
         "height": 1080
       }
