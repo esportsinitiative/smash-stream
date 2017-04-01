@@ -14,6 +14,10 @@
 	/* Pixels */
 	const MAX_PLAYER_NAME_WIDTH = 240;
 	const MAX_HEADER_WIDTH = 460;
+	const BLANK_ELEMENT = {
+		next: '',
+		current: ''
+	}
 
 	Polymer({
 		is: 'ss-melee',
@@ -36,7 +40,7 @@
 
 			matchTitle.on('change', newVal => {
 				if (!newVal.next.trim() && !newVal.current.trim()) {
-					this.matchTitle = null;
+					this.matchTitle = BLANK_ELEMENT;
 				} else {
 					this.matchTitle = {};
 					this.matchTitle = newVal;
@@ -50,7 +54,7 @@
 
 			matchFormat.on('change', newVal => {
 				if (!newVal.next.trim() && !newVal.current.trim()) {
-					this.matchFormat = null;
+					this.matchFormat = BLANK_ELEMENT;
 				} else {
 					this.matchFormat = {};
 					this.matchFormat = newVal;
@@ -64,7 +68,7 @@
 
 			player1.on('change', newVal => {
 				if (!newVal.next.trim() && !newVal.current.trim()) {
-					this.player1 = null;
+					this.player1 = BLANK_ELEMENT;
 				} else {
 					this.player1 = {};
 					this.player1 = newVal;
@@ -78,7 +82,7 @@
 
 			player2.on('change', newVal => {
 				if (!newVal.next.trim() && !newVal.current.trim()) {
-					this.player2 = null;
+					this.player2 = BLANK_ELEMENT;
 				} else {
 					this.player2 = {};
 					this.player2 = newVal;

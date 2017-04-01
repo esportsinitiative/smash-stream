@@ -11,6 +11,10 @@
 	/* Pixels */
 	const MAX_PLAYER_NAME_WIDTH = 240;
 	const MAX_HEADER_WIDTH = 316;
+	const BLANK_ELEMENT = {
+		next: '',
+		current: ''
+	}
 
 	Polymer({
 		is: 'ss-hub-melee',
@@ -22,7 +26,7 @@
 
 			hubTitle.on('change', newVal => {
 				if (!newVal.next.trim() && !newVal.current.trim()) {
-					this.hubTitle = null;
+					this.hubTitle = BLANK_ELEMENT;
 				} else {
 					this.hubTitle = {};
 					this.hubTitle = newVal;
@@ -36,7 +40,7 @@
 
 			hubCommentatorLeft.on('change', newVal => {
 				if (!newVal.next.trim() && !newVal.current.trim()) {
-					this.hubCommentatorLeft = null;
+					this.hubCommentatorLeft = BLANK_ELEMENT;
 				} else {
 					this.hubCommentatorLeft = {};
 					this.hubCommentatorLeft = newVal;
@@ -50,7 +54,7 @@
 
 			hubCommentatorRight.on('change', newVal => {
 				if (!newVal.next.trim() && !newVal.current.trim()) {
-					this.hubCommentatorRight = null;
+					this.hubCommentatorRight = BLANK_ELEMENT;
 				} else {
 					this.hubCommentatorRight = {};
 					this.hubCommentatorRight = newVal;
@@ -64,7 +68,7 @@
 
 			hubPlayerLeft.on('change', newVal => {
 				if (!newVal.next.trim() && !newVal.current.trim()) {
-					this.hubPlayerLeft = null;
+					this.hubPlayerLeft = BLANK_ELEMENT;
 				} else {
 					this.hubPlayerLeft = {};
 					this.hubPlayerLeft = newVal;
@@ -78,7 +82,7 @@
 
 			hubPlayerRight.on('change', newVal => {
 				if (!newVal.next.trim() && !newVal.current.trim()) {
-					this.hubPlayerRight = null;
+					this.hubPlayerRight = BLANK_ELEMENT;
 				} else {
 					this.hubPlayerRight = {};
 					this.hubPlayerRight = newVal;
