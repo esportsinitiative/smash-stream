@@ -2,13 +2,15 @@
 	'use strict';
 
 	Polymer({
-		is: 'toth-sponsors',
+		is: 'ss-sponsors',
 
 		properties: {
 			logoUrls: {
 				type: Array,
 				value: [
-					'url("img/sponsors/twitch.png")'
+					'url("img/sponsors/twitch.png")',
+					'url("img/sponsors/xsplit.png")',
+					'url("img/sponsors/smash-n-splash.png")'
 				]
 			},
 			duration: {
@@ -17,7 +19,7 @@
 			},
 			interval: {
 				type: Number,
-				value: 10 * 60
+				value: 0
 			},
 			fadeTime: {
 				type: Number,
@@ -77,19 +79,19 @@
 				ease: Power1.easeInOut
 			}, `+=${this.duration}`);
 
-			// Slide out to left
+			// Slide out to right
 			this.tl.to(this, 0.6, {
-				x: -300,
+				x: 300,
 				ease: Power2.easeIn
 			});
 		},
 
 		ready() {
-			TweenLite.set(this, {x: -300});
+			TweenLite.set(this, {x: 300});
 
 			// Show every 10 minutes
 			this.show();
-			setInterval(this.show.bind(this), this.interval * 1000);
+			setInterval(this.show.bind(this), ((this.duration + 2) * this.logoUrls.length) * 1000);
 		}
 	});
 })();
