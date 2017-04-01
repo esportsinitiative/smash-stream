@@ -97,8 +97,10 @@
 
 		attached() {
 			scores.on('change', newVal => {
-				this.rightScore = newVal.red.score;
-				this.leftScore = newVal.blu.score;
+				this.rightScore = newVal.right.score;
+				this.leftScore = newVal.left.score;
+				this.rightTag = newVal.right.tag;
+				this.leftTag = newVal.left.tag;
 			});
 
 			scoreboardShowing.on('change', this.scoreVisibleChange.bind(this));

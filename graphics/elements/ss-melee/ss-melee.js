@@ -97,8 +97,13 @@
 
 		attached() {
 			scores.on('change', newVal => {
-				this.rightScore = newVal.red.score;
-				this.leftScore = newVal.blu.score;
+				this.rightScore = newVal.right.score;
+				this.leftScore = newVal.left.score;
+				this.rightTag = newVal.right.tag;
+				this.leftTag = newVal.left.tag;
+
+				this.$$('#score-left .score').innerText = this.leftScore;
+				this.$$('#score-right .score').innerText = this.rightScore;
 			});
 
 			scoreboardShowing.on('change', this.scoreVisibleChange.bind(this));
@@ -246,18 +251,6 @@
 					ease: Power2.easeIn
 				}, 'scoreVisibleExit');
 			}
-		},
-
-		rightScoreChanged(newVal) {
-			this.changeScore(this.$$('#score-left .score'), newVal);
-		},
-
-		leftScoreChanged(newVal) {
-			this.changeScore(this.$$('#score-right .score'), newVal);
-		},
-
-		changeScore(scoreEl, newValue) {
-			scoreEl.innerHTML = newValue;
 		},
 
 		setAndFitText(node, newString, maxWidth) {

@@ -6,17 +6,22 @@
 	const hide = document.getElementById('hide');
 	const swap = document.getElementById('swap');
 	const leftScore = document.querySelectorAll('paper-input[label="Score"]')[0];
-	const bluTag = document.querySelectorAll('paper-input[label="Tag"]')[0];
+	// const leftTag = document.querySelectorAll('paper-input[label="Tag"]')[0];
 	const rightScore = document.querySelectorAll('paper-input[label="Score"]')[1];
-	const redTag = document.querySelectorAll('paper-input[label="Tag"]')[1];
+	// const rightTag = document.querySelectorAll('paper-input[label="Tag"]')[1];
 	const scoreboardShowing = nodecg.Replicant('scoreboardShowing');
 	const scores = nodecg.Replicant('scores');
 
+	const leftTag = {value: 'left'};
+	const rightTag = {value: 'right'};
+
 	scores.on('change', newVal => {
-		leftScore.value = newVal.blu.score;
-		bluTag.value = newVal.blu.tag;
-		rightScore.value = newVal.red.score;
-		redTag.value = newVal.red.tag;
+		if (newVal != undefined) {
+			leftScore.value = newVal.left.score;
+			leftTag.value = newVal.left.tag;
+			rightScore.value = newVal.right.score;
+			rightTag.value = newVal.right.tag;
+		}
 	});
 
 	scoreboardShowing.on('change', newVal => {
@@ -36,7 +41,9 @@
 		scoreboardShowing.value = true;
 	});
 
-	update.addEventListener('click', doUpdate);
+	update.addEventListener('click', () => {
+		doUpdate();
+	});
 
 	hide.addEventListener('click', () => {
 		scoreboardShowing.value = false;
@@ -44,26 +51,26 @@
 
 	swap.addEventListener('click', () => {
 		scores.value = {
-			red: {
-				score: scores.value.blu.score,
-				tag: scores.value.blu.tag
+			right: {
+				score: scores.value.left.score,
+				tag: scores.value.left.tag
 			},
-			blu: {
-				score: scores.value.red.score,
-				tag: scores.value.red.tag
+			left: {
+				score: scores.value.right.score,
+				tag: scores.value.right.tag
 			}
 		};
 	});
 
 	function doUpdate() {
 		scores.value = {
-			red: {
+			right: {
 				score: rightScore.value,
-				tag: redTag.value
+				tag: rightTag.value
 			},
-			blu: {
+			left: {
 				score: leftScore.value,
-				tag: bluTag.value
+				tag: leftTag.value
 			}
 		};
 	}
