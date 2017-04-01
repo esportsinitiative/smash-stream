@@ -1,0 +1,114 @@
+<link rel="import" href="../../components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../components/nodecg-replicant/nodecg-replicant.html">
+<link rel="import" href="../../components/paper-button/paper-button.html">
+<link rel="import" href="../../components/paper-input/paper-input.html">
+<link rel="import" href="../../components/paper-item/paper-item.html">
+<link rel="import" href="../../components/vaadin-combo-box/vaadin-combo-box.html">
+
+<dom-module id="match-info">
+	<template>
+		<style include="iron-flex iron-flex-alignment">
+			.talent-dropdown {
+				padding: 0 4px;
+			}
+
+			.next {
+				padding: 0 4px;
+			}
+
+			.current {
+				padding: 0 4px;
+			}
+		</style>
+
+		<div class="horizontal layout">
+			<div class="flex talent-dropdown">
+				<vaadin-combo-box
+						label="Match Title"
+						on-selected-item-changed="_handleSelectedItemChangedNext"
+                        item-label-path="name"
+				        data-slot="matchTitle"
+				></vaadin-combo-box>
+
+				<vaadin-combo-box
+						label="Match Type"
+						on-selected-item-changed="_handleSelectedItemChangedNext"
+	                    item-label-path="name"
+				        data-slot="matchFormat"
+				></vaadin-combo-box>
+			</div>
+
+			<div class="flex-2 next">
+				<paper-input label="Next" value="{{matchTitle.next}}" always-float-label></paper-input>
+				<paper-input label="Next" value="{{matchFormat.next}}" always-float-label></paper-input>
+			</div>
+
+			<div class="flex-2 current">
+				<paper-input disabled="[[matchInfoVisible]]" label="Current" value="{{matchTitle.current}}" always-float-label></paper-input>
+				<paper-input disabled="[[matchInfoVisible]]" label="Current" value="{{matchFormat.current}}" always-float-label></paper-input>
+			</div>
+		</div>
+
+		<div class="horizontal layout">
+			<paper-button raised on-tap="updateGameInfo" disabled="{{matchInfoVisible}}" class="nodecg-success flex">
+				Update Match Info
+			</paper-button>
+
+			<paper-button raised on-tap="showGameInfo" disabled="{{matchInfoVisible}}" class="nodecg-success flex">
+				Show Match Info
+			</paper-button>
+
+			<paper-button raised on-tap="hideGameInfo" disabled="{{!matchInfoVisible}}" class="nodecg-danger flex">
+				Hide Match Info
+			</paper-button>
+		</div>
+
+		<div class="horizontal layout">
+			<div class="flex players-dropdown">
+				<vaadin-combo-box
+						label="Player Name Left"
+						on-selected-item-changed="_handleSelectedItemChangedNext"
+	                    item-label-path="name"
+				        data-slot="player1"
+				></vaadin-combo-box>
+
+				<vaadin-combo-box
+						label="Player Name Right"
+						on-selected-item-changed="_handleSelectedItemChangedNext"
+                        item-label-path="name"
+				        data-slot="player2"
+				></vaadin-combo-box>
+			</div>
+
+			<div class="flex-2 next">
+				<paper-input label="Next" value="{{player1.next}}" always-float-label></paper-input>
+				<paper-input label="Next" value="{{player2.next}}" always-float-label></paper-input>
+			</div>
+
+			<div class="flex-2 current">
+				<paper-input disabled="[[playersVisible]]" label="Current" value="{{player1.current}}" always-float-label></paper-input>
+				<paper-input disabled="[[playersVisible]]" label="Current" value="{{player2.current}}" always-float-label></paper-input>
+			</div>
+		</div>
+
+		<div class="horizontal layout">
+			<paper-button raised on-tap="updatePlayers" disabled="{{playersVisible}}" class="nodecg-success flex">
+				Update Players
+			</paper-button>
+
+			<paper-button raised on-tap="showPlayers" disabled="{{playersVisible}}" class="nodecg-success flex">
+				Show Players
+			</paper-button>
+
+			<paper-button raised on-tap="hidePlayers" disabled="{{!playersVisible}}" class="nodecg-danger flex">
+				Hide Players
+			</paper-button>
+		</div>
+
+		<nodecg-replicant replicant-name="matchInfoVisible" value="{{matchInfoVisible}}"></nodecg-replicant>
+		<nodecg-replicant replicant-name="playerVisible" value="{{playersVisible}}"></nodecg-replicant>
+	</template>
+
+	<script src="match-info.js"></script>
+</dom-module>

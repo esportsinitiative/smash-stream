@@ -1,0 +1,76 @@
+<link rel="import" href="../../components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../components/nodecg-replicant/nodecg-replicant.html">
+<link rel="import" href="../../components/paper-button/paper-button.html">
+<link rel="import" href="../../components/paper-input/paper-input.html">
+<link rel="import" href="../../components/paper-item/paper-item.html">
+<link rel="import" href="../../components/vaadin-combo-box/vaadin-combo-box.html">
+
+<dom-module id="ss-hub">
+	<template>
+		<style include="iron-flex iron-flex-alignment">
+			.dropdown {
+				padding: 0 4px;
+			}
+
+			.next {
+				padding: 0 4px;
+			}
+
+			.current {
+				padding: 0 4px;
+			}
+
+			.what div {
+				display: flex;
+				/* Vertical center alignment */
+				align-items: center;
+				/* Horizontal center alignment */
+				justify-content: flex-start;
+				height: 62px;
+				font-weight: bold;
+				font-size: 20px;
+			}
+
+		</style>
+
+		<div class="horizontal layout">
+			<div class="flex dropdown what">
+				<div>Hub Title</div>
+				<div>Commentator Left</div>
+				<div>Commentator Right</div>
+				<div>Player Left</div>
+				<div>Player Right</div>
+			</div>
+
+			<div class="flex-2 next">
+				<paper-input label="Next" value="{{hubTitle.next}}" always-float-label></paper-input>
+				<paper-input label="Next" value="{{hubCommentatorLeft.next}}" always-float-label></paper-input>
+				<paper-input label="Next" value="{{hubCommentatorRight.next}}" always-float-label></paper-input>
+				<paper-input label="Next" value="{{hubPlayerLeft.next}}" always-float-label></paper-input>
+				<paper-input label="Next" value="{{hubPlayerRight.next}}" always-float-label></paper-input>
+			</div>
+
+			<div class="flex-2 current">
+				<paper-input disabled="true" label="Current" value="{{hubTitle.current}}" always-float-label></paper-input>
+				<paper-input disabled="true" label="Current" value="{{hubCommentatorLeft.current}}" always-float-label></paper-input>
+				<paper-input disabled="true" label="Current" value="{{hubCommentatorRight.current}}" always-float-label></paper-input>
+				<paper-input disabled="true" label="Current" value="{{hubPlayerLeft.current}}" always-float-label></paper-input>
+				<paper-input disabled="true" label="Current" value="{{hubPlayerRight.current}}" always-float-label></paper-input>
+			</div>
+		</div>
+
+		<div class="horizontal layout">
+			<paper-button raised on-tap="updateHub" class="nodecg-success flex">
+				Update Hub Content
+			</paper-button>
+			<paper-button raised on-tap="showHubUpdates" class="nodecg-success flex">
+				Show Hub Content
+			</paper-button>
+		</div>
+
+		<nodecg-replicant replicant-name="hubShowUpdate" value="{{hubShowUpdate}}"></nodecg-replicant>
+	</template>
+
+	<script src="hub.js"></script>
+</dom-module>
