@@ -1,14 +1,14 @@
 <link rel="import" href="../../components/iron-flex-layout/classes/iron-flex-layout.html">
 
 <dom-module id="toth-brb">
-    <template>
+	<template>
 		<style>
 			:host {
 				display: flex;
 				flex-direction: column;
 				justify-content: space-around;
 				align-items: center;
-				color: #E4E4E4;
+				color: #000;
 				opacity: 0;
 			}
 
@@ -27,13 +27,14 @@
 				margin: 0;
 			}
 
-			iron-image {
-				width: 600px;
-				height: 250px;
+			img {
+				/*width: 600px;*/
+				height: 550px;
 			}
 
 			.textShadow {
-				text-shadow: 0 0 10px rgba(244,116,37,0.7);
+				/*text-shadow: 0 0 10px rgba(145,9,9,0.7);*/
+				text-shadow: 0 0 15px rgba(255,255,255,0.7);
 			}
 
 			#upNext {
@@ -49,32 +50,32 @@
 			}
 
 			#panel-body {
-				background: rgba(0,0,0,0.5);
+				background: rgba(0, 0, 0, 0.5);
 				padding: 30px 40px;
 			}
+
+			.logo-box {
+
+			}
+
+			.layout-center {
+				display: flex;
+				/* Vertical center alignment */
+				align-items: center;
+				/* Horizontal center alignment */
+				justify-content: center;
+			}
+
 		</style>
 
-        <h1 class="textShadow">Be Right Back!</h1>
+		<h1 class="textShadow">Be Right Back!</h1>
 
-        <h2 id="upNext" class="textShadow">Up Next: <span id="event"></span></h2>
+		<h2 id="upNext" class="textShadow">Up Next: <span id="event"></span></h2>
 
-        <div id="panel">
-            <div id="panel-head">
-                While you're waiting...
-            </div>
-            <div id="panel-body" class="layout horizontal center">
-                <div class="layout vertical center" style="margin-right: 75px;">
-                    <iron-image sizing="contain" preload fade src="img/cosi.png"></iron-image>
-                    <h3 class="lightTextShadow" style="color: #F47425;">tipofthehats.org/donate</h3>
-                </div>
-
-                <div class="layout vertical center" style="margin-left: 75px;">
-                    <iron-image sizing="contain" preload fade src="img/shirt.png"></iron-image>
-                    <h3 class="lightTextShadow">teespring.com/toth2016</h3>
-                </div>
-            </div>
-        </div>
-    </template>
+		<div class="logo-box">
+			<img class="layout-center" src="img/shuffle-logo-solo.png"></img>
+		</div>
+	</template>
 
 	<script src="toth-brb.js"></script>
 </dom-module>
