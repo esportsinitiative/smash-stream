@@ -1,15 +1,12 @@
 (function () {
 	'use strict';
 
-	const matchTitle = nodecg.Replicant('matchTitle');
-	const matchFormat = nodecg.Replicant('matchFormat');
-	const player1 = nodecg.Replicant('player1');
-	const player2 = nodecg.Replicant('player2');
-	const matchInfoVisible = nodecg.Replicant('matchInfoVisible');
-	const playerVisible = nodecg.Replicant('playerVisible');
-
-	const scoreboardShowing = nodecg.Replicant('scoreboardShowing');
-	const scores = nodecg.Replicant('scores');
+	const hubTitle = nodecg.Replicant('hubTitle');
+	const hubCommentatorLeft = nodecg.Replicant('hubCommentatorLeft');
+	const hubCommentatorRight = nodecg.Replicant('hubCommentatorRight');
+	const hubPlayerLeft = nodecg.Replicant('hubPlayerLeft');
+	const hubPlayerRight = nodecg.Replicant('hubPlayerRight');
+	const hubShowUpdate = nodecg.Replicant('hubShowUpdate');
 
 	/* Pixels */
 	const MAX_PLAYER_NAME_WIDTH = 240;
@@ -18,252 +15,121 @@
 	Polymer({
 		is: 'ss-hub-melee',
 
-		properties: {
-			rightScore: {
-				type: Number,
-				value: 0,
-				observer: 'rightScoreChanged'
-			},
-			leftScore: {
-				type: Number,
-				value: 0,
-				observer: 'leftScoreChanged'
-			}
-		},
-
 		ready() {
-			this.tl = new TimelineLite({autoRemoveChildren: true});
+			// this.tl = new TimelineLite({
+			// 	autoRemoveChildren: true
+			// });
 
-			matchTitle.on('change', newVal => {
+			hubTitle.on('change', newVal => {
 				if (!newVal.next.trim() && !newVal.current.trim()) {
-					this.matchTitle = null;
+					this.hubTitle = null;
 				} else {
-					this.matchTitle = {};
-					this.matchTitle = newVal;
+					this.hubTitle = {};
+					this.hubTitle = newVal;
 				}
 
-				if (!this._matchTitleReady) {
-					this._matchTitleReady = true;
+				if (!this._hubTitleReady) {
+					this._hubTitleReady = true;
 					this._checkReplicantsReady();
 				}
 			});
 
-			matchFormat.on('change', newVal => {
+			hubCommentatorLeft.on('change', newVal => {
 				if (!newVal.next.trim() && !newVal.current.trim()) {
-					this.matchFormat = null;
+					this.hubCommentatorLeft = null;
 				} else {
-					this.matchFormat = {};
-					this.matchFormat = newVal;
+					this.hubCommentatorLeft = {};
+					this.hubCommentatorLeft = newVal;
 				}
 
-				if (!this._matchFormatReady) {
-					this._matchFormatReady = true;
+				if (!this._hubCommentatorLeftReady) {
+					this._hubCommentatorLeftReady = true;
 					this._checkReplicantsReady();
 				}
 			});
 
-			player1.on('change', newVal => {
+			hubCommentatorRight.on('change', newVal => {
 				if (!newVal.next.trim() && !newVal.current.trim()) {
-					this.player1 = null;
+					this.hubCommentatorRight = null;
 				} else {
-					this.player1 = {};
-					this.player1 = newVal;
+					this.hubCommentatorRight = {};
+					this.hubCommentatorRight = newVal;
 				}
 
-				if (!this._player1Ready) {
-					this._player1Ready = true;
+				if (!this._hubCommentatorRightReady) {
+					this._hubCommentatorRightReady = true;
 					this._checkReplicantsReady();
 				}
 			});
 
-			player2.on('change', newVal => {
+			hubPlayerLeft.on('change', newVal => {
 				if (!newVal.next.trim() && !newVal.current.trim()) {
-					this.player2 = null;
+					this.hubPlayerLeft = null;
 				} else {
-					this.player2 = {};
-					this.player2 = newVal;
+					this.hubPlayerLeft = {};
+					this.hubPlayerLeft = newVal;
 				}
 
-				if (!this._player2Ready) {
-					this._player2Ready = true;
+				if (!this._hubPlayerLeftReady) {
+					this._hubPlayerLeftReady = true;
 					this._checkReplicantsReady();
 				}
 			});
-		},
 
-		attached() {
-			scores.on('change', newVal => {
-				this.rightScore = newVal.red.score;
-				this.leftScore = newVal.blu.score;
+			hubPlayerRight.on('change', newVal => {
+				if (!newVal.next.trim() && !newVal.current.trim()) {
+					this.hubPlayerRight = null;
+				} else {
+					this.hubPlayerRight = {};
+					this.hubPlayerRight = newVal;
+				}
+
+				if (!this._hubPlayerRightReady) {
+					this._hubPlayerRightReady = true;
+					this._checkReplicantsReady();
+				}
 			});
-
-			scoreboardShowing.on('change', this.scoreVisibleChange.bind(this));
 		},
 
 		// Only declare the "visible" replicants once all the other replicants are ready.
 		_checkReplicantsReady() {
-			if (this._matchTitleReady && this._matchFormatReady && this._player1Ready && this._player2Ready) {
+			if (this._hubTitleReady && this._hubCommentatorLeftReady && this._hubCommentatorRightReady && this._hubPlayerLeftReady && this._hubPlayerRightReady) {
 				console.log('all replicants ready, adding change handlers for couchVisible and playerVisible');
-				matchInfoVisible.on('change', this.matchInfoVisibleChanged.bind(this));
-				playerVisible.on('change', this.playersVisibleChanged.bind(this));
+				hubShowUpdate.on('change', this.hubShowUpdatesChange.bind(this));
+
 			}
 		},
 
-		matchInfoVisibleChanged(newVal) {
-			if (newVal) {
-				this.tl.add('matchInfoEnter');
-
-				if (this.matchTitle) {
-					this.tl.call(() => {
-						this.setAndFitText(this.$$('#match-title .header-info'), this.matchTitle.current, MAX_HEADER_WIDTH);
-					}, null, null, 'matchInfoEnter');
-
-					this.tl.to('#match-title', 0.5, {
-						opacity: 1,
-						x: 0,
-						ease: Power2.easeOut
-					}, 'matchInfoEnter');
-				}
-
-				if (this.matchFormat) {
-					this.tl.call(() => {
-						this.setAndFitText(this.$$('#match-type .header-info'), this.matchFormat.current, MAX_HEADER_WIDTH);
-					}, null, null, 'matchInfoEnter');
-
-					this.tl.to('#match-type', 0.5, {
-						opacity: 1,
-						x: 0,
-						ease: Power2.easeOut
-					}, 'matchInfoEnter');
-				}
-			} else {
-				this.tl.add('matchInfoExit');
-
-				this.tl.to([
-					'#match-title'
-				], 0.5, {
-					opacity: 0,
-					x: 25,
-					ease: Power2.easeIn
-				}, 'matchInfoExit');
-
-				this.tl.to([
-					'#match-type'
-				], 0.5, {
-					opacity: 0,
-					x: -25,
-					ease: Power2.easeIn
-				}, 'matchInfoExit');
+		hubShowUpdatesChange(newVal) {
+			if (this.hubTitle) {
+				this.setAndFitText(this.$$('#hub-title span'), this.hubTitle.current, MAX_HEADER_WIDTH);
 			}
-		},
-
-		playersVisibleChanged(newVal) {
-			if (newVal) {
-				this.tl.add('playersEnter');
-
-				if (this.player1) {
-					this.tl.call(() => {
-						this.setAndFitText(this.$$('#player-name-left .player-name'), this.player1.current, MAX_PLAYER_NAME_WIDTH);
-					}, null, null, 'playersEnter');
-
-					this.tl.to('#player-name-left', 0.5, {
-						opacity: 1,
-						x: 0,
-						ease: Power2.easeOut
-					}, 'playersEnter');
-				}
-
-				if (this.player2) {
-					this.tl.call(() => {
-						this.setAndFitText(this.$$('#player-name-right .player-name'), this.player2.current, MAX_PLAYER_NAME_WIDTH);
-					}, null, null, 'playersEnter');
-
-					this.tl.to('#player-name-right', 0.5, {
-						opacity: 1,
-						x: 0,
-						ease: Power2.easeOut
-					}, 'playersEnter');
-				}
-			} else {
-				this.tl.add('playersExit');
-
-				this.tl.to([
-					'#player-name-left'
-				], 0.5, {
-					opacity: 0,
-					x: 25,
-					ease: Power2.easeIn
-				}, 'playersExit');
-
-				this.tl.to([
-					'#player-name-right'
-				], 0.5, {
-					opacity: 0,
-					x: -25,
-					ease: Power2.easeIn
-				}, 'playersExit');
+			if (this.hubCommentatorLeft) {
+				this.setAndFitText(this.$$('#commentator-left .name'), this.hubCommentatorLeft.current, MAX_HEADER_WIDTH);
 			}
-		},
-
-		scoreVisibleChange(newVal) {
-			if (newVal) {
-				this.tl.add('scoreVisibleEnter');
-
-				this.tl.call(() => {
-					this.$$('#score-left .score').innerText = this.leftScore;
-					this.$$('#score-right .score').innerText = this.rightScore;
-				}, null, null, 'scoreVisibleEnter');
-
-				this.tl.to('#score-left', 0.5, {
-					opacity: 1,
-					x: 0,
-					ease: Power2.easeOut
-				}, 'scoreVisibleEnter');
-
-				this.tl.to('#score-right', 0.5, {
-					opacity: 1,
-					x: 0,
-					ease: Power2.easeOut
-				}, 'scoreVisibleEnter');
-			} else {
-				this.tl.add('scoreVisibleExit');
-
-				this.tl.to([
-					'#score-left'
-				], 0.5, {
-					opacity: 0,
-					ease: Power2.easeIn
-				}, 'scoreVisibleExit');
-
-				this.tl.to([
-					'#score-right'
-				], 0.5, {
-					opacity: 0,
-					ease: Power2.easeIn
-				}, 'scoreVisibleExit');
+			if (this.hubCommentatorRight) {
+				this.setAndFitText(this.$$('#commentator-right .name'), this.hubCommentatorRight.current, MAX_HEADER_WIDTH);
 			}
-		},
-
-		rightScoreChanged(newVal) {
-			this.changeScore(this.$$('#score-left .score'), newVal);
-		},
-
-		leftScoreChanged(newVal) {
-			this.changeScore(this.$$('#score-right .score'), newVal);
-		},
-
-		changeScore(scoreEl, newValue) {
-			scoreEl.innerHTML = newValue;
+			if (this.hubPlayerLeft) {
+				this.setAndFitText(this.$$('#hub-player-left .name'), this.hubPlayerLeft.current, MAX_HEADER_WIDTH);
+			}
+			if (this.hubPlayerRight) {
+				this.setAndFitText(this.$$('#hub-player-right .name'), this.hubPlayerRight.current, MAX_HEADER_WIDTH);
+			}
 		},
 
 		setAndFitText(node, newString, maxWidth) {
 			node.innerText = newString;
-			const clientWidth = node.scrollWidth;
-			if (clientWidth > maxWidth) {
-				TweenLite.set(node, {scaleX: maxWidth / clientWidth});
-			} else {
-				TweenLite.set(node, {scaleX: 1});
-			}
+			// const clientWidth = node.scrollWidth;
+			// if (clientWidth > maxWidth) {
+			// 	TweenLite.set(node, {
+			// 		scaleX: maxWidth / clientWidth
+			// 	});
+			// } else {
+			// 	TweenLite.set(node, {
+			// 		scaleX: 1
+			// 	});
+			// }
 		}
 	});
 })();

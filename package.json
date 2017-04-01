@@ -76,6 +76,13 @@
         "width": 5,
         "file": "match-info.html",
         "headerColor": "#f47425"
+      },
+      {
+        "name": "hub",
+        "title": "Hub Control",
+        "width": 5,
+        "file": "hub.html",
+        "headerColor": "#f47425"
       }
     ],
     "soundCues": [

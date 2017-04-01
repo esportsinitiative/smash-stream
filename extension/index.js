@@ -44,4 +44,11 @@ module.exports = function (nodecg) {
 		nodecg.log.error('Failed to load "match-info" lib:', e.stack);
 		process.exit(1);
 	}
+
+	try {
+		require('./hub')(nodecg);
+	} catch (e) {
+		nodecg.log.error('Failed to load "match-info" lib:', e.stack);
+		process.exit(1);
+	}
 };
