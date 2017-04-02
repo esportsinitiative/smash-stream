@@ -5,6 +5,8 @@
 	const matchFormat = nodecg.Replicant('matchFormat');
 	const player1 = nodecg.Replicant('player1');
 	const player2 = nodecg.Replicant('player2');
+	const upNext = nodecg.Replicant('upNext');
+	const upThen = nodecg.Replicant('upThen');
 	const matchInfoVisible = nodecg.Replicant('matchInfoVisible');
 	const playerVisible = nodecg.Replicant('playerVisible');
 
@@ -36,6 +38,7 @@
 		},
 
 		ready() {
+			const self = this;
 			this.tl = new TimelineLite({autoRemoveChildren: true});
 
 			matchTitle.on('change', newVal => {
@@ -92,6 +95,40 @@
 					this._player2Ready = true;
 					this._checkReplicantsReady();
 				}
+			});
+
+			upNext.on('change', newVal => {
+				TweenLite.to(this.$.upNext, 0.5, {
+					onStart() {
+						if (newVal) {
+							self.$.upNextContent.innerText = newVal;
+						}
+					},
+					opacity: newVal ? 1 : 0,
+					ease: Power1.easeInOut,
+					onComplete() {
+						if (!newVal) {
+							self.$.upNextContent.innerText = newVal;
+						}
+					}
+				});
+			});
+
+			upThen.on('change', newVal => {
+				TweenLite.to(this.$.upThen, 0.5, {
+					onStart() {
+						if (newVal) {
+							self.$.upThenContent.innerText = newVal;
+						}
+					},
+					opacity: newVal ? 1 : 0,
+					ease: Power1.easeInOut,
+					onComplete() {
+						if (!newVal) {
+							self.$.upThenContent.innerText = newVal;
+						}
+					}
+				});
 			});
 		},
 

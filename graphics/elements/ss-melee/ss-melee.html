@@ -113,6 +113,25 @@
 						font-size: 95px;
 						color: #000;
 					}
+
+					#schedule {
+						position: absolute;
+						top: 255px;
+						left: 1665px;
+						width: 250px;
+						color: white;
+					}
+
+					#schedule .title {
+						font-weight: bold;
+						font-size: 32px;
+					}
+
+					#schedule .content {
+						font-size: 28px;
+						padding-left: 10px;
+						margin: 0px 10px 0px 0px;
+					}
 				</style>
 				<div id='container'>
 					<img id='g-ai0-0' class='background-img' src='img/melee-fixed.png' />
@@ -133,6 +152,18 @@
 					</div>
 					<div id='score-right'>
 						<span class='score'></span>
+					</div>
+					<div id='schedule'>
+						<div id='upNext'>
+							<span class='title'>Next</span>
+							<br>
+							<p id='upNextContent' class='content'>Best Game Ever</p>
+						</div>
+						<div id='upThen'>
+							<span class='title'>Then</span>
+							<br>
+							<p id='upThenContent' class='content'>Other Best</p>
+						</div>
 					</div>
 				</div>
 			</div>

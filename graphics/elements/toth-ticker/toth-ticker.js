@@ -2,8 +2,8 @@
 	'use strict';
 
 	const INTERVAL = 10;
-	const onNow = nodecg.Replicant('onNow');
 	const upNext = nodecg.Replicant('upNext');
+	const upThen = nodecg.Replicant('upThen');
 
 	Polymer({
 		is: 'toth-ticker',
@@ -79,17 +79,17 @@
 				this.customStyle['--toth-ticker-content-color'] = '#f47425';
 				this.updateStyles();
 				this.$.label.innerText = 'ON NOW';
-				this.$.content.innerHTML = onNow.value;
+				this.$.content.innerHTML = upNext.value;
 				this.fitContent();
 			});
 			this.enter();
 			this.tl.to({}, INTERVAL, {});
 			this.exit();
 
-			if (upNext.value) {
+			if (upThen.value) {
 				this.tl.call(() => {
 					this.$.label.innerText = 'UP NEXT';
-					this.$.content.innerHTML = upNext.value;
+					this.$.content.innerHTML = upThen.value;
 					this.fitContent();
 				});
 				this.enter();

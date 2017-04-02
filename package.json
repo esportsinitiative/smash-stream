@@ -88,6 +88,13 @@
         "width": 5,
         "file": "hub.html",
         "headerColor": "#f47425"
+      },
+      {
+        "name": "schedule",
+        "title": "Schedule",
+        "width": 4,
+        "file": "schedule.html",
+        "headerColor": "#f47425"
       }
     ],
     "soundCues": [
