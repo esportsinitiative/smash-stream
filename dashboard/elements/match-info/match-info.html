@@ -9,7 +9,7 @@
 <dom-module id="match-info">
 	<template>
 		<style include="iron-flex iron-flex-alignment">
-			.talent-dropdown {
+			.dropdown {
 				padding: 0 4px;
 			}
 
@@ -23,7 +23,7 @@
 		</style>
 
 		<div class="horizontal layout">
-			<div class="flex talent-dropdown">
+			<div class="flex dropdown">
 				<vaadin-combo-box
 						label="Match Title"
 						on-selected-item-changed="_handleSelectedItemChangedNext"
@@ -32,7 +32,7 @@
 				></vaadin-combo-box>
 
 				<vaadin-combo-box
-						label="Match Type"
+						label="Match Format"
 						on-selected-item-changed="_handleSelectedItemChangedNext"
 	                    item-label-path="name"
 				        data-slot="matchFormat"
@@ -65,7 +65,7 @@
 		</div>
 
 		<div class="horizontal layout">
-			<div class="flex players-dropdown">
+			<div class="flex dropdown">
 				<vaadin-combo-box
 						label="Player Name Left"
 						on-selected-item-changed="_handleSelectedItemChangedNext"
