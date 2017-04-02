@@ -17,7 +17,7 @@ ESI's Dynamic Smash Stream Content. Based on the [Tip of the Hats 4 - Overlay](h
 
 It provides a dashboard text update system that populates content positioned via HTML over the `png` overlay designs. We used [ai2html](http://ai2html.org/) to quickly turn our `.ai` overlay files into dynamic overlay material which is present thoughout the system. Slight tweets to text positioning were required after the ai2html conversion but this process minimized the design to production window.
 
-![Dashboard](readme-images/dashboard.png)
+![Dashboard](readme-images/dashboard.PNG)
 
 This system was used by the [eSports Initiative](http://esi.gg) throughout their production of [Shuffle: Battle of the Midwest](https://smash.gg/tournament/shuffle-battle-of-the-midwest).
 
