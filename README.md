@@ -47,19 +47,25 @@ Additionally, if you want to maintain a copy of the resources beyond your local 
 
 Install Nodecg and Nodecg CLI
 
-1. Install [NodeCG](http://github.com/nodecg/nodecg) and the [Nodecg CLI](https://www.npmjs.com/package/nodecg-cli) which includes installing:
+1. Install [NodeJS](https://nodejs.org/) (we used Node v7.8 which was the current)
+2. Install [Git](https://git-scm.com/)
+3. Open a terminal (PowerShell, CMD, Git Bash, or other)
+	- PowerShell or Git Bash are recommended on Windows
+4. Install [Nodecg CLI](https://www.npmjs.com/package/nodecg-cli)
+5. Proceed through the `nodecg setup` commands to have the full nodecg product installed
+6. One should now have:
 	- [x] Node & npm
+	- [x] Nodecg CLI
 	- [x] Nodecg
-	- [x] Nodecg CLI -- Simplifies install steps (this can be used to install nodecg actually)
-2. Navigate to your nodecg directory in a terminal (PowerShell, CMD, Git-Bash, or other) using:
+6. Navigate to the created `nodecg/` directory in a terminal using:
 	- `cd` (change directory) -- `cd ..` to go up a directory `cd <folder>` to go down
 	- `pwd` (print working directory) -- see where you are
 	- `ls` (list directories) -- see where you can go
 	- **Hint**: On windows copy the path from File Explorer and `cd` directly to that ex: `cd C:\user\...`
-3. Install the repository by running `nodecg install esportsinitiative/smash-stream` in a terminal
-4. Launch the overlay with `nodecg start`
-5. Navigate to: `localhost:9090/`
-6. Use the overlay and profit!
+7. Install the repository by running `nodecg install esportsinitiative/smash-stream` in a terminal
+8. Launch the overlay with `nodecg start`
+9. Navigate to: `localhost:9090/`
+10. Use the overlay and profit!
 
 ### Docker
 
