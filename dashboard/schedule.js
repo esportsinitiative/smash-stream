@@ -1,24 +1,24 @@
 (function () {
 	'use strict';
 
-	const onNow = nodecg.Replicant('onNow');
 	const upNext = nodecg.Replicant('upNext');
-	const onNowInput = document.getElementById('onNow');
+	const upThen = nodecg.Replicant('upThen');
 	const upNextInput = document.getElementById('upNext');
-	const onNowMonitor = document.getElementById('monitor-onNow');
+	const upThenInput = document.getElementById('upThen');
 	const upNextMonitor = document.getElementById('monitor-upNext');
-	const take = document.getElementById('take');
-
-	onNow.on('change', newVal => {
-		onNowMonitor.innerText = newVal;
-	});
+	const upThenMonitor = document.getElementById('monitor-upThen');
+	const update = document.getElementById('update');
 
 	upNext.on('change', newVal => {
 		upNextMonitor.innerText = newVal;
 	});
 
-	take.addEventListener('click', () => {
-		onNow.value = onNowInput.value;
+	upThen.on('change', newVal => {
+		upThenMonitor.innerText = newVal;
+	});
+
+	update.addEventListener('click', () => {
 		upNext.value = upNextInput.value;
+		upThen.value = upThenInput.value;
 	});
 })();

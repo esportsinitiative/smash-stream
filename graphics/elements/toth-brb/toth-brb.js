@@ -2,7 +2,7 @@
 	'use strict';
 
 	const brbShowing = nodecg.Replicant('brbShowing');
-	const upNext = nodecg.Replicant('upNext');
+	const upThen = nodecg.Replicant('upThen');
 
 	Polymer({
 		is: 'toth-brb',
@@ -19,8 +19,8 @@
 				});
 			});
 
-			upNext.on('change', newVal => {
-				TweenLite.to(self.$.upNext, 0.5, {
+			upThen.on('change', newVal => {
+				TweenLite.to(self.$.upThen, 0.5, {
 					onStart() {
 						if (newVal) {
 							self.$.event.innerText = newVal;
