@@ -5,20 +5,6 @@ module.exports = function (nodecg) {
 	nodecg.Replicant('showHashtag', {defaultValue: true});
 
 	try {
-		require('./lowerthird')(nodecg);
-	} catch (e) {
-		nodecg.log.error('Failed to load lowerthird lib:', e.stack);
-		process.exit(1);
-	}
-
-	try {
-		require('./twitter')(nodecg);
-	} catch (e) {
-		nodecg.log.error('Failed to load "twitter" lib:', e.stack);
-		process.exit(1);
-	}
-
-	try {
 		require('./countdown')(nodecg);
 	} catch (e) {
 		nodecg.log.error('Failed to load "countdown" lib:', e.stack);
