@@ -3,7 +3,7 @@
   "homepage": "http://esi.gg/",
   "authors": [
     "David Soller <dsoller@outlook.com>",
-    "Alex Van Camp <email@alexvan.camp>"
+    "eSports Initiative <esportsinitiative@gmail.com>"
   ],
   "scripts": {
     "static": "eslint **/*.js",
@@ -95,48 +95,6 @@
         "width": 4,
         "file": "schedule.html",
         "headerColor": "#f47425"
-      }
-    ],
-    "soundCues": [
-      {
-        "name": "image_in",
-        "assignable": false,
-        "defaultFile": "sound/image_in.ogg"
-      },
-      {
-        "name": "image_out",
-        "assignable": false,
-        "defaultFile": "sound/image_out.ogg"
-      },
-      {
-        "name": "lowerthird_in",
-        "assignable": false,
-        "defaultFile": "sound/lowerthird_in.ogg"
-      },
-      {
-        "name": "lowerthird_out",
-        "assignable": false,
-        "defaultFile": "sound/lowerthird_out.ogg"
-      },
-      {
-        "name": "scoreboard_in",
-        "assignable": false,
-        "defaultFile": "sound/scoreboard_in.ogg"
-      },
-      {
-        "name": "scoreboard_out",
-        "assignable": false,
-        "defaultFile": "sound/scoreboard_out.ogg"
-      },
-      {
-        "name": "tweet_in",
-        "assignable": false,
-        "defaultFile": "sound/tweet_in.ogg"
-      },
-      {
-        "name": "tweet_out",
-        "assignable": false,
-        "defaultFile": "sound/tweet_out.ogg"
       }
     ]
   }
