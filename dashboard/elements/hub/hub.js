@@ -4,18 +4,14 @@
 	const hubTitle = nodecg.Replicant('hubTitle');
 	const hubCommentatorLeft = nodecg.Replicant('hubCommentatorLeft');
 	const hubCommentatorRight = nodecg.Replicant('hubCommentatorRight');
-	const hubPlayerLeft = nodecg.Replicant('hubPlayerLeft');
-	const hubPlayerRight = nodecg.Replicant('hubPlayerRight');
-	const hubShowUpdate = nodecg.Replicant('hubShowUpdate')
+	const hubShowUpdate = nodecg.Replicant('hubShowUpdate');
 
 
 	// Used to programmatically access any of the above 8 replicants, via `REPLICANTS[name]`.
 	const REPLICANTS = {
 		hubTitle,
 		hubCommentatorLeft,
-		hubCommentatorRight,
-		hubPlayerLeft,
-		hubPlayerRight
+		hubCommentatorRight
 	};
 
 	Polymer({
@@ -36,16 +32,6 @@
 				this.hubCommentatorRight = {};
 				this.hubCommentatorRight = newVal;
 			});
-
-			hubPlayerLeft.on('change', newVal => {
-				this.hubPlayerLeft = {};
-				this.hubPlayerLeft = newVal;
-			});
-
-			hubPlayerRight.on('change', newVal => {
-				this.hubPlayerRight = {};
-				this.hubPlayerRight = newVal;
-			});
 		},
 
 		updateHub() {
@@ -60,14 +46,6 @@
 			if (this.hubCommentatorRight.next != '') {
 				this.hubCommentatorRight.current = this.hubCommentatorRight.next;
 				this.hubCommentatorRight.next = '';
-			}
-			if (this.hubPlayerLeft.next != '') {
-				this.hubPlayerLeft.current = this.hubPlayerLeft.next;
-				this.hubPlayerLeft.next = '';
-			}
-			if (this.hubPlayerRight.next != '') {
-				this.hubPlayerRight.current = this.hubPlayerRight.next;
-				this.hubPlayerRight.next = '';
 			}
 		},
 

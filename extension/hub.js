@@ -6,7 +6,5 @@ module.exports = function (nodecg) {
 	nodecg.Replicant('hubTitle', {defaultValue: {next: '', current: ''}});
 	nodecg.Replicant('hubCommentatorLeft', {defaultValue: {next: '', current: ''}});
 	nodecg.Replicant('hubCommentatorRight', {defaultValue: {next: '', current: ''}});
-	nodecg.Replicant('hubPlayerLeft', {defaultValue: {next: '', current: ''}});
-	nodecg.Replicant('hubPlayerRight', {defaultValue: {next: '', current: ''}});
 	nodecg.Replicant('hubShowUpdate', {defaultValue: false})
 };
