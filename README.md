@@ -47,7 +47,7 @@ Additionally, if you want to maintain a copy of the resources beyond your local 
 
 Install Nodecg and Nodecg CLI
 
-1. Install [NodeCG](http://github.com/nodecg/nodecg) and the [Nodecg CLI](https://www.npmjs.com/package/nodecg-cli) which includes installing:
+1. Install [NodeCG](http://nodecg.com) and the [Nodecg CLI](https://www.npmjs.com/package/nodecg-cli) which includes installing:
 	- [x] Node & npm
 	- [x] Nodecg
 	- [x] Nodecg CLI -- Simplifies install steps (this can be used to install nodecg actually)
