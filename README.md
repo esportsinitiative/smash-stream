@@ -2,6 +2,8 @@
 
 ESI's Dynamic Smash Stream Content. Based on [NodeCG](http://nodecg.com) and the [Tip of the Hats 4 - Overlay](https://github.com/TipoftheHats/toth4-overlay) but modified for a smash tournament running (see [What does it do?](#what-does-it-do))
 
+**Usage Note**: The overlays can currently only be used with [Google Chrome](https://www.google.com/chrome/) and [OBS Studio](https://obsproject.com/) (with [v1.21 of its Browser Source plugin](https://github.com/kc5nra/obs-browser/releases/tag/1.21)) or [vMix](http://www.vmix.com/) which is a [NodeCG](http://nodecg.com) restriction.
+
 <!-- TOC depthFrom:2 -->
 
 - [What does it do?](#what-does-it-do)
