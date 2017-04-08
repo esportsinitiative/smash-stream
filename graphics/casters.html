@@ -7,6 +7,7 @@
 	<script src="components/gsap/src/minified/TweenMax.min.js"></script>
 	<script src="app/main.js"></script>
 	<link href="elements/ss-casters/ss-casters.html" rel="import">
+	<link href="elements/ss-social/ss-social.html" rel="import">
 
 	<style>
 		body {
@@ -28,53 +29,13 @@
 			height: 900px;
 			top: 130px;
 		}
-
-		#hashtag {
-			position: absolute;
-			font-family: arial, helvetica, sans-serif;
-			top: 18px;
-			width: 240px;
-			font-size: 32px;
-			font-weight: 700;
-			color: white;
-			opacity: 0;
-			text-align: center;
-		}
-
-		#lowerthird {
-			position: absolute;
-			bottom: 0;
-		}
-
-		#scoreboard {
-			position: absolute;
-			top: 70px;
-			left: 50%;
-			transform: translateX(-50%);
-		}
-
-		#lowerthird {
-			position: absolute;
-			top: 805px;
-			right: 88px;
-		}
-
-		#nowPlaying {
-			position: absolute;
-			top: 680px;
-			left: 25px;
-		}
-		#nameplate {
-			position: absolute;
-			top: 180px;
-		}
 	</style>
 </head>
 <body>
     <div id="container">
 		<ss-casters id="casters"></ss-casters>
         <toth-brb id="brb"></toth-brb>
-		<div id="hashtag"></div>
+		<ss-social id="social"></ss-social>
     </div>
 </body>
 </html>
