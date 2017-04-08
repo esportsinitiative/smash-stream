@@ -1,0 +1,61 @@
+<link rel="import" href="../../components/polymer/polymer.html">
+
+<dom-module id="ss-social">
+	<template>
+		<div id='social-overlay' data-min-width='1920'>
+			<style type='text/css' media='screen,print'>
+				#ss-social {
+					position: relative;
+					overflow: hidden;
+					width: 1920px;
+					height: 1080px;
+					font-family: arial, helvetica, sans-serif;
+					margin: 0;
+				}
+
+				.logo-bar {
+					font-weight: bold;
+					margin: 0;
+					font-size: 20px;
+					line-height: 29px;
+					color: #ffffff;
+				}
+
+				.logo-bar div {
+					position: absolute;
+					top: 1.2963%;
+				}
+
+				#hashtag {
+					left: 11.0384%;
+				}
+
+				#website {
+					left: 23.144%;
+				}
+
+				#twitter {
+					left: 35.4827%;
+				}
+
+				#facebook {
+					left: 61.4779%;
+				}
+
+				#instagram {
+					left: 72.8616%;
+				}
+			</style>
+
+			<div class='logo-bar'>
+				<div id='hashtag'></div>
+				<div id='website'></div>
+				<div id='twitter'></div>
+				<div id='facebook'></div>
+				<div id='instagram'></div>
+			</div>
+		</div>
+	</template>
+
+	<script src="ss-social.js"></script>
+</dom-module>

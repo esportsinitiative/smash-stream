@@ -11,6 +11,7 @@ ESI's Dynamic Smash Stream Content. Based on [NodeCG](http://nodecg.com) and the
 - [Setup](#setup)
     - [Local](#local)
     - [Docker](#docker)
+    - [Make It Your Own](#make-it-your-own)
 - [Credits](#credits)
 
 <!-- /TOC -->
@@ -68,6 +69,7 @@ Install Nodecg and Nodecg CLI
 8. Launch the overlay with `nodecg start`
 9. Navigate to: `localhost:9090/`
 10. Use the overlay and profit!
+11. Proceed to [Make It Your Own](#make-it-your-own)
 
 ### Docker
 
@@ -91,11 +93,20 @@ nodecg start
 
 6. Navigate to: `localhost:9090/`
 7. Use the overlay and profit!
+8. Proceed to [Make It Your Own](#make-it-your-own)
+
+### Make It Your Own
+
+Update content the following content:
+
+File Location | Content
+--- | ---
+`smash-stream/graphics/elements/ss-social/ss-social.js` | social media links
 
 ## Credits
 
 The overlays are based on the work of the [NodeCG Team](http://nodecg.com/) and the [Tip of the Hats 4 - Overlays](https://github.com/TipoftheHats/toth4-overlay). The Smash addaptation was done by:
 
 - [David Soller](https://github.com/3ygun) - Developer
-- [Elliot Schoolcraft]() - Designer
+- Elliot Schoolcraft - Designer
 - Andrew Carringer - Editor
